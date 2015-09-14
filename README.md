@@ -22,8 +22,8 @@ Among the things I'd like to build:
 
 # What I have done so far
 
-* ![Powering the esp 8266](http://orionrobots.co.uk/2015/04/29/powering-the-esp8266)
-* ![Making a wifi controlled Light with the ESP8266](http://orionrobots.co.uk/2015/06/10/esp-8266-wifi-led)
+* [Powering the esp 8266](http://orionrobots.co.uk/2015/04/29/powering-the-esp8266)
+* [Making a wifi controlled Light with the ESP8266](http://orionrobots.co.uk/2015/06/10/esp-8266-wifi-led)
 
 # What I am doing currently
 
