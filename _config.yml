@@ -1,0 +1,7 @@
+pygments: true
+title: Esp 8266 Video Series Notes
+production_url: http://orionrobots.github.io/esp8266_video_series/
+encoding: UTF-8
+markdown: kramdown
+baseurl: /esp8266_video_series
+github_url: https://github.com/orionrobots/esp8266_video_series/tree/gh-pages/
