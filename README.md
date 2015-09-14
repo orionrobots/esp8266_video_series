@@ -7,6 +7,7 @@ Notes, code and details for my esp8266 videos
 The Esp 8266 is a chip used in a family of modules which make it quite simple to make small and lower power devices that can connect to the internet with Wi-Fi. It can run user code, and has a number of inputs and outputs to attach sensors and devices.
 
 [![](http://img.youtube.com/vi/bjc2h5gWnMQ/0.jpg)](https://www.youtube.com/watch?v=bjc2h5gWnMQ)
+
 [What is the ESP 8266 and Why Am I Excited About it?](https://www.youtube.com/watch?v=bjc2h5gWnMQ)
 
 # Plans
