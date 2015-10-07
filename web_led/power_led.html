@@ -1,0 +1,22 @@
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+	<script>
+	function power(state) {
+		$.get("/" + state);
+	}
+
+	$(function(){
+		$("#power_on").click(function(){
+			power('on');});
+		$("#power_off").click(function(){
+			power('off');});
+	});
+	</script>
+</head>
+<body>
+	<h1>LED Power</h1>
+	<input type="radio" name="power" id="power_on" value="on" checked>on</input>
+	<input type="radio" name="power" value="off" id="power_off">off</input>
+</body>
+</html>
