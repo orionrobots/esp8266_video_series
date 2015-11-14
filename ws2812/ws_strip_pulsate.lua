@@ -1,6 +1,5 @@
 pin = 1
-leds = 29
-
+leds = 64
 --Pulsate
 current = 1
 current_dir = 4

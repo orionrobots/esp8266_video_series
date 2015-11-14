@@ -8,12 +8,12 @@ purple = string.char(60, 0, 60)
 yellow = string.char(60, 60, 0)
 
 ws2812.writergb(1, red..green..blue..purple..white..off:rep(29))
-tmr.delay(1000000)
+tmr.delay(10000)
 ws2812.writergb(1, off:rep(29))
-tmr.delay(100000)
+tmr.delay(10000)
 
 pin = 1
-leds = 29
+leds = 64
 
 
 current = 1
