@@ -2,6 +2,8 @@
 
 This is an esp8266/NodeMCU based robot with 2 wheels that is both inexpensive, and a starting platform for fun and experimentation.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZYZelug2SW0" frameborder="0" allowfullscreen></iframe>
+
 # Bill Of Materials
 
 * Robot Chassis - many on ebay as "smart robot chassis". These are extremely cheap, you shouldn't pay more than about £15 for it. It should have:
@@ -33,6 +35,8 @@ Bolt the castor onto the chassis too.
 Looking at the video for reference - lay out the motor control board so the motor cables can reach it.
 Put the battery box at one end, and leave room for the breadboard the other.
 
+Screw the motors, and battery cables into the L298N motor controller.
+
 # Wiring the breadboard
 
 Wire the breadboard before sticking it on the chassis. This needs a bit of thought.
@@ -48,6 +52,24 @@ Connect the voltage rails to the 5v and ground connections on the L298.
 Connect D1, 2, 3 from the ESP to ENA, 1, 2 on the L298.
 And
 D4, 5, 6 on then ESP to to 3, 4, ENB on the L298.
+
+# Code
+
+If you've not done so, flash the esp8266 with the NodeMCU firmware - I se the NodeMCU Flasher tool.
+Get the start code from this project and upload it. Warning - If you've already put batteries in, have a hand ready to catch the robot as it drives off the table!
+
+# Go!
+
+Put the batteries in, and press the reset button to see it move.
+
+# Problems
+
+This first needs a power switch - currently removing a battery is the only way to turn it off.
+Also - a few resistors may be needed between the esp and the motor controller. IT was designed for 5v use, and I noticed the esp getting a bit warm - so these could limit current if it's not being particular good with power.
+The L298N uses 6 io, with some jumpered designs only needing 4. Other motor controller solutions may need fewer pins - leaving them free for experimenting.
+
+These will be addressed in follow up work.
+
 
 
 
