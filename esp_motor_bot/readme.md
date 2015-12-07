@@ -2,7 +2,7 @@
 
 This is an esp8266/NodeMCU based robot with 2 wheels that is both inexpensive, and a starting platform for fun and experimentation.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZYZelug2SW0" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZYZelug2SW0" frameborder="0" allowfullscreen="true"></iframe>
 
 # Bill Of Materials
 
