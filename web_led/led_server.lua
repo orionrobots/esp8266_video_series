@@ -15,10 +15,15 @@ function set_led(value)
 	gpio.write(pin, value)
 end
 
+print("Initialising")
+print(wifi.sta.getip())
 gpio.mode(pin, gpio.OUTPUT)
+print("Creating server")
 srv=net.createServer(net.TCP)
+print("Start listening on port 80")
 srv:listen(80,function(conn)
   conn:on("receive",function(conn,payload)
+    print(payload)
 	if string.find(payload, "/on") then
 		set_led(gpio.HIGH)
 		conn:send("on")
@@ -28,7 +33,7 @@ srv:listen(80,function(conn)
 	elseif string.find(payload, "GET / HTTP") then
 		serve_html(conn)
 	else
-		print(payload)
+        print("Sending hello")
 		conn:send("<h1> Hello, NodeMcu.</h1>")
 	end
   end)
