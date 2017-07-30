@@ -2,7 +2,7 @@ These were used in getting Micropython linked with a WS2801 light strip, and the
 
 The diagram shows an LPD8806, but the WS2801 and 8806 appear to be equivalent parts.
 
-![Led Strip Servo Motor Attempt](led-strip-servo-motor-attempt-bb.png)
+![Led Strip Servo Motor Attempt](led-strip-servo-motor-attempt_bb.png)
 
 The file <servo_sweep.py> uses SPI to instruct the WS2801 lights to sweep up from 0 to 255, and then back down.
 
