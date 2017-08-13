@@ -36,4 +36,3 @@ def crouch():
     for leg in right_side:
         leg.knee.release()
 
-
