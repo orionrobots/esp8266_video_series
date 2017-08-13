@@ -63,3 +63,30 @@ class Leg():
         if invert:
             self.hip.invert = True
             self.knee.invert = True
+
+def init():
+    """From the front:
+            00
+    --0--0--0    0--0--0--
+    1  0  2    4  3  5
+    --0--0--0    0--0--0--
+    11 10  9    6  7  8
+    --0--0--0    0--0--0--
+    14 12 13    17 15 16
+    """
+    i2c = I2C(scl=Pin(5), sda=Pin(4), freq=100000)
+    robot = Robot(i2c)
+
+    left_side = [
+        Leg(robot,  2,  0,  1),
+        Leg(robot,  9, 10, 11),
+        Leg(robot, 13, 12, 14)
+    ]
+
+    right_side = [
+        Leg(robot, 4, 3, 5, invert=True),
+        Leg(robot, 6, 7, 8, invert=True),
+        Leg(robot, 17, 15, 16, invert=True)
+    ]
+
+    return left_side, right_side
