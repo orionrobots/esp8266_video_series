@@ -1,9 +1,4 @@
-"""Control for the spider bot servo's.
-Libraries:
-    * micropython-adafruit-pca9685 - servo.py and pca9685.py.
-    * https://bitbucket.org/thesheep/micropython-servo/src/f562a6abeaf0e83b752838df7cd31d88ea10b2c7/servo.py?at=default&fileviewer=file-view-default
-        * as direct_servo.py with class DServo.
-"""
+"""Control for the spider bot servo's."""
 from machine import Pin, I2C
 import servo
 from direct_servo import DServo
