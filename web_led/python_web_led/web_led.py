@@ -19,6 +19,13 @@ def respond(conn):
     conn.send('Connection: close\n\n')
     conn.send('<h1>Hello, Micropython in a function</h1>\n')
 
+def service_connection(conn):
+    request = conn.recv(1024)
+    # request = conn.readline()
+    print("Request received - in service connection")
+    respond(conn)
+    conn.close()
+
 s = socket.socket()
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 try:
@@ -26,9 +33,6 @@ try:
   s.listen(5)
   while True:
     conn, addr = s.accept()
-    request = conn.recv(1024)
-    print("Request received")
-    respond(conn)
-    conn.close()
-finally: 
+    service_connection(conn)
+finally:
   s.close()
