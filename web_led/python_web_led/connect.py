@@ -1,7 +1,7 @@
 
 # Turn off vendor messages
-import esp
-esp.osdebug(None)
+# import esp
+# esp.osdebug(None)
 
 def connect():
     import network
