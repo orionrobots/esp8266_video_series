@@ -26,11 +26,11 @@ def service_connection(routes, conn):
     if '?' in uri:
         uri, params = uri.split('?')
     if routes.get(uri):
-        routes[uri](conn, params, request_line)
-    
+        routes[uri](conn)
+
     conn.close()
 
-def start_server(routes):
+def start_server(routes, async_function=None):
     print("Connecting")
     connect()
     print("Connected")
@@ -53,5 +53,7 @@ def start_server(routes):
             except OSError as e:
                 if e.args[0] != 110:
                     raise
+            if async_function:
+                async_function()
     finally:
         s.close()

@@ -1,0 +1,9 @@
+open COM3
+put ../web_led/python_web_led/serve.py serve.py
+put ../web_led/python_web_led/connect.py connect.py
+put spiderbot.py
+put spider_menu.html
+put spider_serve.py main.py
+put crab_gait.py
+put leg_by_leg_gait.py
+ls
