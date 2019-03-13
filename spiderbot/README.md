@@ -13,6 +13,7 @@ First you need to have micropython Flashed on the Esp8266. Ampy is a good tool t
 You will need the following libraries:
 
   * micropython-adafruit-pca9685 - servo.py and pca9685.py.
+        https://github.com/adafruit/micropython-adafruit-pca9685
   * https://bitbucket.org/thesheep/micropython-servo/src/f562a6abeaf0e83b752838df7cd31d88ea10b2c7/servo.py?at=default&fileviewer=file-view-default
       * as direct_servo.py with class DServo.
       
@@ -24,6 +25,7 @@ Then upload the spiderbot.py, spiderbot_demo.py and the gait files you want to t
 
 ../web_led/python_web_led/serve.py
 ../web_led/python_web_led/connect.py
+../python_libs/direct_servo.py
 spiderbot.py
 spider_menu.py
 spider_serve.py

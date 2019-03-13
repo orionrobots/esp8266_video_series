@@ -1,6 +1,7 @@
 open COM3
 put ../web_led/python_web_led/serve.py serve.py
 put ../web_led/python_web_led/connect.py connect.py
+put ../python_libs/direct_servo.py direct_servo.py
 put spiderbot.py
 put spider_menu.html
 put spider_serve.py main.py

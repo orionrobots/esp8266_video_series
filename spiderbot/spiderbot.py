@@ -1,6 +1,6 @@
 """Control for the spider bot servo's."""
 from machine import Pin, I2C
-import servo
+import servo # adafruit serves
 from direct_servo import DServo
 from time import sleep
 
