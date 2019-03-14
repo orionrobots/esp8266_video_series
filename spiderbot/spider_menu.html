@@ -3,13 +3,14 @@
         <meta charset="UTF-8">
         <title>My Robot Menu</title>
         <link rel="stylesheet" type="text/css" href="/static/display.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <h1>Spider bot menu</h1>
-    <li><a class="button" href="/crouch">Crouch</a></li>
-    <li><a class="button" href="/neutral">Neutral</a></li>
-    <li><a class="button" href="/crab">Crab</a></li>
-    <li><a class="button" href="/leg-by-leg">Leg By Leg</a></li>
-    <li><a class="button" href="/stop">Stop</a></li>
+    <li><a class="button" href="#" onclick="$.get('/crouch')" onclick=>Crouch</a></li>
+    <li><a class="button" href="#" onclick="$.get('/neutral')">Neutral</a></li>
+    <li><a class="button" href="#" onclick="$.get('/crab')">Crab</a></li>
+    <li><a class="button" href="#" onclick="$.get('/leg-by-leg')">Leg By Leg</a></li>
+    <li><a class="button" href="#" onclick="$.get('/stop')">Stop</a></li>
 </body>
 </html>

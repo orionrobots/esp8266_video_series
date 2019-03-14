@@ -32,18 +32,21 @@ class MotionController:
 
 def main():
     spider = init()
+    spider.neutral()
     motion_controller = MotionController(spider)
-        
-    routes = {
-        '/': lambda conn: serve_file(conn, 'spider_menu.html'),
-        '/crouch': wrap_action(spider.crouch, 'crouch'),
-        '/neutral': wrap_action(spider.neutral, 'neutral'),
-        '/leg-by-leg': motion_controller.start_motion(leg_by_leg),
-        '/crab': motion_controller.start_motion(crab),
-        '/stop': motion_controller.stop_motion,
-    }
-    start_server(routes, async_function=motion_controller.motion)
-
+    
+    try:
+        routes = {
+            '/': lambda conn: serve_file(conn, 'spider_menu.html'),
+            '/crouch': wrap_action(spider.crouch, 'crouch'),
+            '/neutral': wrap_action(spider.neutral, 'neutral'),
+            '/leg-by-leg': motion_controller.start_motion(leg_by_leg),
+            '/crab': motion_controller.start_motion(crab),
+            '/stop': motion_controller.stop_motion,
+        }
+        start_server(routes, async_function=motion_controller.motion)
+    finally:
+        motion_controller.stop_motion('')
 
 if __name__ == "__main__":
     main()

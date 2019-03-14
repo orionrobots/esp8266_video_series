@@ -23,6 +23,8 @@ Then upload the spiderbot.py, spiderbot_demo.py and the gait files you want to t
 
 # Upload files:
 
+
+pip3 install adafruit-ampy
 ../web_led/python_web_led/serve.py
 ../web_led/python_web_led/connect.py
 ../python_libs/direct_servo.py
@@ -31,6 +33,13 @@ spider_menu.py
 spider_serve.py
 crab_grait.py
 leg_by_leg_gait.py
+
+mkdir deps
+pushd deps
+wget https://github.com/adafruit/micropython-adafruit-pca9685/releases/download/1.1.1/pca9685.mpy
+wget https://github.com/adafruit/micropython-adafruit-pca9685/releases/download/1.1.1/servo.mpy
+popd
+
 
 ## Notes on server
 
