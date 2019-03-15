@@ -1,9 +1,11 @@
-from serve import respond_html, serve_file, start_server
-from spiderbot import init
-from leg_by_leg_gait import leg_by_leg
-from crab_gait import crab
 import gc
 
+from serve import respond_html, serve_file, start_server
+from spiderbot import init
+from leg_by_leg_gait import leg_by_leg_tween
+from crab_gait import crab
+
+from tweening_control import crouch, stand
 
 def wrap_action(action, name):
     def _wrap(conn):
@@ -28,7 +30,12 @@ class MotionController:
 
     def motion(self):
         if self.current_motion:
-            next(self.current_motion)
+            try:
+                next(self.current_motion)
+            except StopIteration:
+                self.current_motion = None
+                gc.collect()
+
 
 def main():
     spider = init()
@@ -38,9 +45,10 @@ def main():
     try:
         routes = {
             '/': lambda conn: serve_file(conn, 'spider_menu.html'),
-            '/crouch': wrap_action(spider.crouch, 'crouch'),
+            '/crouch': motion_controller.start_motion(crouch),
+            '/stand': motion_controller.start_motion(stand),
             '/neutral': wrap_action(spider.neutral, 'neutral'),
-            '/leg-by-leg': motion_controller.start_motion(leg_by_leg),
+            '/leg-by-leg': motion_controller.start_motion(leg_by_leg_tween),
             '/crab': motion_controller.start_motion(crab),
             '/stop': motion_controller.stop_motion,
         }

@@ -23,6 +23,8 @@ Then upload the spiderbot.py, spiderbot_demo.py and the gait files you want to t
 
 # Upload files:
 
+rshell -p /dev/tty.usbserial-1410 rep
+./spider_deploy.sh 
 
 pip3 install adafruit-ampy
 ../web_led/python_web_led/serve.py
