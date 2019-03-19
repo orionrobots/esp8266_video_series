@@ -1,2 +1,2 @@
-AMPY_PORT=COM3
+AMPY_PORT=/dev/tty.usbserial-1410
 AMPY_BAUD=115200

@@ -1,7 +1,9 @@
 from time import sleep
+
 import spiderbot
 from machine import reset
 from spiderbot_demo import neutral, left_side, right_side, crouch
+
 
 class ScalingLegGroup:
     def __init__(self, legs, scale_indexes):

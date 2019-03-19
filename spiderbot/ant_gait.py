@@ -1,53 +1,110 @@
-from time import sleep
-import spiderbot
-from machine import reset
-from spiderbot_demo import neutral, left_side, right_side
+from tweening_control import Tween, TweenPlayer
 
-def move_group(group, knee=None, hip=None, foot=None, delay=None):
-    """Group is a list of legs. Change all the positions
-    as defined"""
-    for leg in group:
-        if foot:
-            leg.foot.position(foot)
-        if knee:
-            leg.knee.position(knee)
-        if hip:
-            leg.hip.position(hip)
-    if delay:
-        sleep(delay)
+class ScaleServo:
+    """Servo motor with scaling. Used for turning operations"""
+    def __init__(self, servo, scale):
+        self._servo = servo
+        self._scale = scale
 
-knees_up = 30
-knees_down = 90
+    def scale(self, scale):
+        self._scale = scale
 
-def ant_pattern(hips_range=20, position_delay=0.1, smooth_delay=0.01, smooth_speed=4):
-    group1 = [left_side[0], right_side[1], left_side[2]]
-    group2 = [right_side[0], left_side[1], right_side[2]]
-    neutral(False)
-    # Put group1 up first
-    move_group(group1, knee=knees_up, delay=position_delay)
-    # Starting from neutral (but knees up)
-    while True:
-        # Sweep group1 hips forward (in the air)
-        # While sweeping group2 hips back
-        for n in range(0, hips_range, smooth_speed):
-            move_group(group1, hip=90+n)
-            move_group(group2, hip=90-n)
-            sleep(smooth_delay)
-        # Now place group 1 down
-        move_group(group1, knee=knees_down, delay=position_delay)
-        # Pick group 2 up
-        move_group(group2, knee=knees_up, delay=position_delay)
-        # Now sweep the other way - group1 goes back, group1 forward, by 60
-        for n in range(-hips_range, hips_range, smooth_speed):
-            move_group(group1, hip=90-n)
-            move_group(group2, hip=90+n)
-            sleep(smooth_delay)
-        # Place group 2 down and 1 up
-        move_group(group2, knee=knees_down, delay=position_delay)
-        move_group(group1, knee=knees_up, delay=position_delay)
-        # Now half sweep group 1 forward, and 2 back (to neutral)
-        for n in range(-hips_range, 0, smooth_speed):
-            move_group(group1, hip=90+n)
-            move_group(group2, hip=90-n)
-            sleep(smooth_delay)
+    def position(self, position):
+        """Position the scaled servo.
+        positions are relative to 90 degrees"""
+        angle = 90 + int(self._scale * position)
+        self._servo.position(angle)
 
+
+def ant_gait(spider, left_scale=1, right_scale=1, hips_range=20):
+    knees_up = 30
+    knees_down = 90
+    feet_in = 60
+    feet_out = 90
+
+    
+    group_1 = [
+        spider.left_side[0],
+        spider.right_side[1],
+        spider.left_side[2]
+    ]
+    group_1_hips = [
+        ScaleServo(spider.left_side[0].hip, left_scale),
+        ScaleServo(spider.right_side[1].hip, right_scale),
+        ScaleServo(spider.left_side[2].hip, left_scale),
+    ]
+    group_2 = [
+        spider.right_side[0],
+        spider.left_side[1],
+        spider.right_side[2]
+    ]
+    group_2_hips = [
+        ScaleServo(spider.right_side[0].hip, right_scale),
+        ScaleServo(spider.left_side[1].hip, left_scale),
+        ScaleServo(spider.right_side[2].hip, right_scale),
+    ]
+    # lift up group 1
+    for leg in group_1:
+        leg.knee.position(knees_up)
+        leg.foot.position(feet_in)
+
+    def position_all_hips(position):
+        for hip in group_1_hips:
+            hip.position(position)
+        for hip in group_2_hips:
+            hip.position(-position)
+
+    player = TweenPlayer()
+    current_frame = 0
+    # sweep group 1 back, group 2 forward
+    player.add_tween(Tween(
+        0, 20, position_all_hips, 0, hips_range
+    ))
+    # put down group 1
+    for leg in group_1:
+        # put down group 1
+        player.add_tween(Tween(
+            20, 25, leg.knee.position, knees_up, knees_down
+        ))
+        player.add_tween(Tween(
+            20, 25, leg.foot.position, feet_in, feet_out
+        ))
+    # lift group 2
+    for leg in group_2:
+        # lift up group 2
+        player.add_tween(Tween(
+            25, 30, leg.knee.position, knees_down, knees_up
+        ))
+        player.add_tween(Tween(
+            25, 30, leg.foot.position, feet_out, feet_in
+        ))
+    # sweep group 2 back, group 1 forward
+    player.add_tween(Tween(
+        30, 40, position_all_hips, hips_range, -hips_range
+    ))
+    # group 2 down
+    for leg in group_2:
+        # lift up group 2
+        player.add_tween(Tween(
+            40, 45, leg.knee.position, knees_up, knees_down
+        ))
+        player.add_tween(Tween(
+            40, 45, leg.foot.position, feet_in, feet_out
+        ))
+    # group 1 up
+    for leg in group_1:
+        # lift up group 2
+        player.add_tween(Tween(
+            45, 50, leg.knee.position, knees_down, knees_up
+        ))
+        player.add_tween(Tween(
+            45, 50, leg.foot.position, feet_out, feet_in
+        ))
+    # Now half sweep group 1 forward, and 2 back (to neutral)
+    player.add_tween(Tween(
+        50, 60, position_all_hips, -hips_range, 0
+    ))
+    player.loop = True
+    player.set_end(60)
+
+    return player.animate()

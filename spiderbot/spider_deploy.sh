@@ -23,4 +23,5 @@ ampy put spider_menu.html spider_menu.html
 ampy put spider_serve.py main.py
 ampy put crab_gait.py crab_gait.py
 ampy put leg_by_leg_gait.py leg_by_leg_gait.py
+ampy put ant_gait.py ant_gait.py
 ampy ls
