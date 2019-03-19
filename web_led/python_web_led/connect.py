@@ -10,8 +10,8 @@ def connect():
     nic = network.WLAN(network.STA_IF)
     nic.active(True)
     nic.scan()
-    # nic.connect('VM0455243', 'Rj9wnjygvDpj')
-    nic.connect('HUAWEI_Honor 8_ECB1', '23ba0766')
+
+    nic.connect('SSID', 'KEY')
 
     print("Waiting for connection...")
     
