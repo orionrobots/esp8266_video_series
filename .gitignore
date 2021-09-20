@@ -3,3 +3,4 @@ python_libs/webrepl-master*
 deps
 python_libs/networks.py
 
+.DS_Store
